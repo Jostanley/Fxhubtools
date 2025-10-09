@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel = "styleSheet " href="forex-tool.css"
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forex Trade Journal — Record and Review Your Trades | Fxhubtools</title>
+  <meta name="description" content="Use our Forex Trade Journal to log every trade, track performance, and improve strategy consistency over time.">
+  <meta name="keywords" content="forex trade journal, trading log, trade tracker, trading performance, fxhubtools">
+  <link rel="canonical" href="https://fxhubtools.onrender.com/trade-journal.html">
+
+  <meta property="og:title" content="Forex Trade Journal — Track and Improve Your Trading">
+  <meta property="og:description" content="Record trades, measure performance, and develop consistency using this free online forex trade journal.">
+  <meta property="og:image" content="https://fxhubtools.onrender.com/assets/trade-journal-cover.jpg">
+  <meta property="og:url" content="https://fxhubtools.onrender.com/trade-journal.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "SoftwareApplication",
+    "name": "Forex Trade Journal",
+    "operatingSystem": "All",
+    "applicationCategory": "FinanceApplication",
+    "description": "Online forex trading journal to log trades, track results, and improve consistency.",
+    "url": "https://fxhubtools.onrender.com/trade-journal.html"
+  }
+  </script>
+</head>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    
+   onAuthStateChanged(auth,(user)=>{
+        if(!user){
+            window.location.href ="./index.html"
+        } else{
+            document.getElementById("container").style.display= "block"
+        }
+    })
+</script>
+<body>
+    <div id="container">
+  <header>
+   
+    <nav>
+      <a href="pip-calculator.html">Pip</a>
+      <a href="risk-calculator.html">Risk</a>
+      <a href="position-size.html">Position</a>
+      <a href="profit-loss.html">P/L</a>
+      <a href="trade-journal.html">Journal</a>
+  </header>
+
+  <h1>Trade Journal</h1>
+   <div class="banner journal">
+    <span>✍️</span>
+    <p>Turn Every Trade into a Lesson – Track, review, and grow with your trading journal.</p>
+  </div>
+  
+
+  <div class="card">
+    <label>Date</label>
+    <input id="tdate" type="date">
+
+    <label>Pair</label>
+    <input id="tpair" type="text" placeholder="EURUSD">
+
+    <label>Direction</label>
+    <select id="tdir"><option value="long">Long</option><option value="short">Short</option></select>
+
+    <label>Entry</label>
+    <input id="tentry" type="number" step="0.0001">
+
+    <label>Exit</label>
+    <input id="texit" type="number" step="0.0001">
+
+    <label>Lot Size</label>
+    <input id="tlots" type="number" step="0.01" value="1">
+
+    <label>Notes / Setup</label>
+    <textarea id="tnotes" placeholder="Why you entered, idea, emotion"></textarea>
+
+    <div class="actions">
+      <button id="add">Add to Journal</button>
+      <button id="clearAll" style="background:#c33">Clear All</button>
+      <button id="exportCSV" style="background:#0a8">Export CSV</button>
+      <button id="exportJSON" style="background:#555">Export JSON</button>
+    </div>
+
+    <div id="tableWrap"></div>
+  </div>
+
+  <script>
+    const LS_KEY = 'fx_trade_journal_v1';
+
+    function loadJournal(){
+      const raw = localStorage.getItem(LS_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }
+    function saveJournal(list){
+      localStorage.setItem(LS_KEY, JSON.stringify(list));
+      renderTable();
+    }
+
+    function addEntry(){
+      const date = document.getElementById('tdate').value || new Date().toISOString().slice(0,10);
+      const pair = document.getElementById('tpair').value.trim();
+      const dir = document.getElementById('tdir').value;
+      const entry = parseFloat(document.getElementById('tentry').value);
+      const exit = parseFloat(document.getElementById('texit').value);
+      const lots = parseFloat(document.getElementById('tlots').value) || 1;
+      const notes = document.getElementById('tnotes').value.trim();
+
+      if(!pair || isNaN(entry) || isNaN(exit)){
+        alert('Please enter pair, entry and exit prices.');
+        return;
+      }
+
+      // compute pip diff & profit using simple pip unit method
+      const pipUnit = (entry > 10 || exit > 10) ? 0.01 : 0.0001;
+      const pipDiff = (dir === 'long') ? (exit - entry)/pipUnit : (entry - exit)/pipUnit;
+      // default pip value per lot approximate 10 USD for USD-quoted pairs
+      const pipValue = 10;
+      const profit = pipDiff * pipValue * lots;
+
+      const rec = { id: Date.now(), date, pair, dir, entry, exit, lots, pipDiff: +pipDiff.toFixed(1), profit: +profit.toFixed(2), notes };
+      const list = loadJournal();
+      list.unshift(rec);
+      saveJournal(list);
+      clearForm();
+    }
+
+    function clearForm(){
+      document.getElementById('tpair').value = '';
+      document.getElementById('tdir').value = 'long';
+      document.getElementById('tentry').value = '';
+      document.getElementById('texit').value = '';
+      document.getElementById('tlots').value = '1';
+      document.getElementById('tnotes').value = '';
+    }
+
+    function renderTable(){
+      const list = loadJournal();
+      const wrap = document.getElementById('tableWrap');
+      if(list.length === 0){
+        wrap.innerHTML = '<p style="margin-top:12px"><em>No trades saved yet.</em></p>';
+        return;
+      }
+      let html = '<table><thead><tr><th>Date</th><th>Pair</th><th>Dir</th><th>Entry</th><th>Exit</th><th>Lots</th><th>Pips</th><th>Profit</th><th>Notes</th><th></th></tr></thead><tbody>';
+      list.forEach(r=>{
+        html += `<tr>
+          <td>${r.date}</td>
+          <td>${r.pair}</td>
+          <td>${r.dir}</td>
+          <td>${r.entry}</td>
+          <td>${r.exit}</td>
+          <td>${r.lots}</td>
+          <td>${r.pipDiff}</td>
+          <td>$${r.profit}</td>
+          <td style="max-width:200px">${escapeHtml(r.notes)}</td>
+          <td><button data-id="${r.id}" class="delBtn">Del</button></td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      wrap.innerHTML = html;
+
+      document.querySelectorAll('.delBtn').forEach(b=>{
+        b.addEventListener('click', (e)=>{
+          const id = parseInt(e.currentTarget.dataset.id);
+          const list = loadJournal().filter(x=>x.id !== id);
+          saveJournal(list);
+        });
+      });
+    }
+
+    function escapeHtml(s){
+      if(!s) return '';
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function clearAll(){
+      if(!confirm('Clear all journal entries?')) return;
+      localStorage.removeItem(LS_KEY);
+      renderTable();
+    }
+
+    function download(filename, content){
+      const blob = new Blob([content], {type:'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportCSV(){
+      const list = loadJournal();
+      if(list.length === 0){ alert('No entries to export.'); return; }
+      const rows = [
+        ['Date','Pair','Dir','Entry','Exit','Lots','Pips','Profit','Notes']
+      ];
+      list.forEach(r=>{
+        rows.push([r.date,r.pair,r.dir,r.entry,r.exit,r.lots,r.pipDiff,r.profit, (r.notes||'').replace(/\n/g,' ')]);
+      });
+      const csv = rows.map(r=> r.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+      download('trade-journal.csv', csv);
+    }
+
+    function exportJSON(){
+      const list = loadJournal();
+      if(list.length === 0){ alert('No entries to export.'); return; }
+      download('trade-journal.json', JSON.stringify(list, null, 2));
+    }
+
+    // events
+    document.getElementById('add').addEventListener('click', addEntry);
+    document.getElementById('clearAll').addEventListener('click', clearAll);
+    document.getElementById('exportCSV').addEventListener('click', exportCSV);
+    document.getElementById('exportJSON').addEventListener('click', exportJSON);
+
+    // initial render
+    renderTable();
+  </script>
+  </div>
+</body>
+</html>

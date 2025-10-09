@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel = "styleSheet" href = "forex-tool.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forex Pip Calculator — Calculate Pip Value Instantly | Fxhubtools</title>
+  <meta name="description" content="Use our free Forex Pip Calculator to determine the pip value of your trades in seconds. Perfect for traders managing position size and profits accurately.">
+  <meta name="keywords" content="forex pip calculator, pip value calculator, forex tools, pip calculator online, fxhubtools">
+  <link rel="canonical" href="https://fxhubtools.onrender.com/pip-calculator.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Forex Pip Calculator — Free Online Tool by Fxhubtools">
+  <meta property="og:description" content="Quickly calculate forex pip value per currency pair. Essential for trade risk and reward management.">
+  <meta property="og:url" content="https://fxhubtools.onrender.com/pip-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://fxhubtools.onrender.com/assets/pip-calculator-cover.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "SoftwareApplication",
+    "name": "Forex Pip Calculator",
+    "operatingSystem": "All",
+    "applicationCategory": "FinanceApplication",
+    "description": "Free forex pip calculator that helps traders determine pip value and manage risk easily.",
+    "url": "https://fxhubtools.onrender.com/pip-calculator.html"
+  }
+  </script>
+</head>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    
+   onAuthStateChanged(auth,(user)=>{
+        if(!user){
+            window.location.href ="./index.html"
+        } else{
+            document.getElementById("container").style.display= "block"
+        }
+    })
+</script>
+<body>
+    <div id="container">
+  <header>
+    <nav>
+      <a href="pip-calculator.html">Pip</a>
+      <a href="risk-calculator.html">Risk</a>
+      <a href="position-size.html">Position</a>
+      <a href="profit-loss.html">P/L</a>
+      <a href="trade-journal.html">Journal</a>
+    </nav>
+  </header>
+  <h1>pip calculator</h1>
+    <div class="banner pip">
+    <span>📊</span>
+    <p>Master Your Pips with Precision – Instantly calculate pip values and trade smarter.</p>
+  </div>
+
+  <div class="card">
+    <label for="pair">Currency Pair (select preset or choose Custom)</label>
+    <select id="pair">
+      <option value="EURUSD">EUR/USD</option>
+      <option value="GBPUSD">GBP/USD</option>
+      <option value="USDJPY">USD/JPY</option>
+      <option value="AUDUSD">AUD/USD</option>
+      <option value="EURGBP">EUR/GBP</option>
+      <option value="custom">Custom (enter rate)</option>
+    </select>
+
+    <label for="rate">Current Quote / Exchange Rate <small>(for custom or accurate JPY)</small></label>
+    <input id="rate" type="number" step="0.0001" placeholder="e.g. 1.0850 for EURUSD; 154.30 for USDJPY">
+
+    <label for="lot">Lot size (standard lot = 1.0 = 100,000 units)</label>
+    <input id="lot" type="number" step="0.01" value="1">
+
+    <button id="calc">Calculate Pip Value</button>
+
+    <div id="out" class="result" aria-live="polite"></div>
+  </div>
+
+  <script>
+    // Preset logic:
+    const pairEl = document.getElementById('pair');
+    const rateEl = document.getElementById('rate');
+    const lotEl = document.getElementById('lot');
+    const out = document.getElementById('out');
+
+    function presetRateFor(pair){
+      // These are example typical quotes — user can override by entering rate
+      const presets = {
+        'EURUSD': 1.0850,
+        'GBPUSD': 1.2750,
+        'AUDUSD': 0.6400,
+        'USDJPY': 154.30,
+        'EURGBP': 0.8500
+      };
+      return presets[pair] || '';
+    }
+
+    pairEl.addEventListener('change', ()=> {
+      const p = pairEl.value;
+      if(p === 'custom'){
+        rateEl.placeholder = 'Enter current quote (e.g. 1.0850)';
+        rateEl.value = '';
+      } else {
+        rateEl.value = presetRateFor(p);
+      }
+    });
+
+    document.getElementById('calc').addEventListener('click', ()=> {
+      const pair = pairEl.value;
+      const rate = parseFloat(rateEl.value);
+      const lot = parseFloat(lotEl.value) || 1;
+
+      if(pair === 'custom' && (isNaN(rate) || rate <= 0)){
+        out.innerHTML = '<b style="color:#c00">Enter a valid quote for custom pair.</b>';
+        return;
+      }
+      // Pip value (USD quoted pairs): pipValue ≈ (0.0001 * lot * 100000) * (quote currency denominator)
+      // Simpler approach:
+      let pipValue;
+      if(pair.endsWith('USD') || pair === 'EURUSD' || pair === 'GBPUSD' || pair === 'AUDUSD' || pair === 'NZDUSD'){
+        // For pairs quoted in USD, pip for standard lot ≈ $10 when pip = 0.0001
+        pipValue = 0.0001 * 100000 * lot; // = 10 * lot
+      } else if(pair === 'USDJPY' || (pair.endsWith('JPY'))){
+        // JPY pairs use 0.01
+        // pipValue (per standard lot) = 0.01 * 100000 / rate (since quote currency is JPY)
+        if(isNaN(rate) || rate <= 0){
+          out.innerHTML = '<b style="color:#c00">Enter current JPY quote in the rate field.</b>';
+          return;
+        }
+        pipValue = (0.01 * 100000 * lot) / rate; // approximate USD value per pip
+      } else if(pair === 'EURGBP' || pair === 'GBPJPY' || pair === 'OTHER'){
+        // For cross pairs we suggest user enter rate and we'll compute approximate pip in USD terms
+        if(isNaN(rate) || rate <= 0){
+          out.innerHTML = '<b style="color:#c00">Enter the pair quote in the rate field for accurate result.</b>';
+          return;
+        }
+        // Use 0.0001 * 100000 * lot * conversionFactor
+        // We'll approximate pip in quote currency then convert using rate assuming quote currency ~ USD equivalent
+        pipValue = 0.0001 * 100000 * lot * rate; // rough
+      } else {
+        // Default fallback (assume USD-quoted)
+        pipValue = 0.0001 * 100000 * lot;
+      }
+
+      // Calculate for 1 standard lot and for chosen lot
+      const perPip = pipValue;
+      out.innerHTML = `
+        <div><b>Pip value (per pip):</b> $${perPip.toFixed(4)}</div>
+        <div style="margin-top:6px"><small>Explanation: this is an approximate USD value per pip for the chosen lot size.</small></div>
+      `;
+    });
+  </script>
+  </div>
+</body>
+</html>

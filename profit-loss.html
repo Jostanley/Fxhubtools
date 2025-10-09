@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel = "styleSheet" href = "forex-tool.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forex Profit and Loss Calculator — Estimate Trade Results | Fxhubtools</title>
+  <meta name="description" content="Use our free Forex Profit and Loss Calculator to estimate trade outcomes in pips, percentage, or currency value.">
+  <meta name="keywords" content="forex profit calculator, profit loss calculator, trade profit, forex P/L, fxhubtools">
+  <link rel="canonical" href="https://fxhubtools.onrender.com/profit-loss.html">
+
+  <meta property="og:title" content="Forex Profit & Loss Calculator — Plan Your Trades Better">
+  <meta property="og:description" content="Estimate profits and losses easily before executing any trade. Available for all forex pairs.">
+  <meta property="og:image" content="https://fxhubtools.onrender.com/assets/profit-loss-cover.jpg">
+  <meta property="og:url" content="https://fxhubtools.onrender.com/profit-loss.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "SoftwareApplication",
+    "name": "Forex Profit & Loss Calculator",
+    "operatingSystem": "All",
+    "applicationCategory": "FinanceApplication",
+    "description": "Estimate potential trade profits or losses quickly with this easy forex calculator.",
+    "url": "https://fxhubtools.onrender.com/profit-loss.html"
+  }
+  </script>
+ 
+</head>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    
+   onAuthStateChanged(auth,(user)=>{
+        if(!user){
+            window.location.href ="./index.html"
+        } else{
+            document.getElementById("container").style.display= "block"
+        }
+    })
+</script>
+<body>
+    <div id="container">
+  <header>
+    <nav>
+      <a href="pip-calculator.html">Pip</a>
+      <a href="risk-calculator.html">Risk</a>
+      <a href="position-size.html">Position</a>
+      <a href="profit-loss.html">P/L</a>
+      <a href="trade-journal.html">Journal</a>
+    </nav>
+  </header>
+
+  <h1>Profit & Loss Calculator</h1>
+  <div class="banner profit">
+    <span>💰</span>
+    <p>Plan Ahead, Win More – Estimate profits or losses before you trade.</p>
+  </div>
+
+  <div class="card">
+    <label>Direction</label>
+    <select id="dir">
+      <option value="long">Long (buy -> sell)</option>
+      <option value="short">Short (sell -> buy)</option>
+    </select>
+
+    <label>Entry Price</label>
+    <input id="entry" type="number" step="0.0001">
+
+    <label>Exit Price</label>
+    <input id="exit" type="number" step="0.0001">
+
+    <label>Lot Size (lots)</label>
+    <input id="lots" type="number" step="0.01" value="1">
+
+    <label>Pip value per 1 lot (USD)</label>
+    <input id="pipval" type="number" step="0.0001" value="10">
+
+    <button id="calcPL">Calculate P/L</button>
+
+    <div id="out" class="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('calcPL').addEventListener('click', ()=> {
+      const dir = document.getElementById('dir').value;
+      const entry = parseFloat(document.getElementById('entry').value);
+      const exit = parseFloat(document.getElementById('exit').value);
+      const lots = parseFloat(document.getElementById('lots').value) || 0;
+      const pipval = parseFloat(document.getElementById('pipval').value);
+
+      if(isNaN(entry) || isNaN(exit) || isNaN(lots) || isNaN(pipval)){
+        document.getElementById('out').innerHTML = '<b style="color:#c00">Please fill all fields correctly.</b>';
+        return;
+      }
+
+      // Determine pip unit
+      let pipUnit = (entry > 10 || exit > 10) ? 0.01 : 0.0001;
+      let pipDiff;
+      if(dir === 'long') pipDiff = (exit - entry) / pipUnit;
+      else pipDiff = (entry - exit) / pipUnit;
+
+      const profit = pipDiff * pipval * lots;
+
+      document.getElementById('out').innerHTML = `
+        <div><b>Pip difference:</b> ${pipDiff.toFixed(1)} pips</div>
+        <div style="margin-top:6px"><b>Profit / Loss:</b> $${profit.toFixed(2)}</div>
+        <div style="margin-top:6px"><small>If negative, it's a loss. Adjust lot size or exit to manage risk.</small></div>
+      `;
+    });
+  </script>
+  </div>
+</body>
+</html>

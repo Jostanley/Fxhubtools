@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel ="styleSheet" href = "forex-tool.css">
+  
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forex Risk Calculator — Manage Trade Risk | Fxhubtools</title>
+  <meta name="description" content="Use our free Forex Risk Calculator to calculate how much you should risk per trade. Protect your capital and trade smart.">
+  <meta name="keywords" content="forex risk calculator, trade risk, risk management tool, forex lot risk, fxhubtools">
+  <link rel="canonical" href="https://fxhubtools.onrender.com/risk-calculator.html">
+
+  <meta property="og:title" content="Forex Risk Calculator — Manage Your Trades Wisely">
+  <meta property="og:description" content="Enter account balance, risk %, and stop loss distance to know your ideal trade risk.">
+  <meta property="og:image" content="https://fxhubtools.onrender.com/assets/risk-calculator-cover.jpg">
+  <meta property="og:url" content="https://fxhubtools.onrender.com/risk-calculator.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "SoftwareApplication",
+    "name": "Forex Risk Calculator",
+    "operatingSystem": "All",
+    "applicationCategory": "FinanceApplication",
+    "description": "Free forex risk calculator to help traders control exposure and manage money effectively.",
+    "url": "https://fxhubtools.onrender.com/risk-calculator.html"
+  }
+  </script>
+</head>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    
+   onAuthStateChanged(auth,(user)=>{
+        if(!user){
+            window.location.href ="./index.html"
+        } else{
+            document.getElementById("container").style.display= "block"
+        }
+    })
+</script>
+<body>
+    <div id="container">
+  <header>
+    <nav>
+      <a href="pip-calculator.html">Pip</a>
+      <a href="risk-calculator.html">Risk</a>
+      <a href="position-size.html">Position</a>
+      <a href="profit-loss.html">P/L</a>
+      <a href="trade-journal.html">Journal</a>
+    </nav>
+  </header>
+  
+
+  <h1>Risk Calculator (by %)</h1>
+   <div class="banner risk">
+    <span>⚖️</span>
+    <p>Control Your Risk Before You Enter – Protect your capital with smart risk calculation.</p>
+  </div>
+
+  <div class="card">
+    <label>Account Balance (USD)</label>
+    <input id="acc" type="number" step="0.01" placeholder="1000">
+
+    <label>Select Risk Percentage</label>
+    <select id="riskSelect">
+      <option value="0.5">0.5%</option>
+      <option value="1">1%</option>
+      <option value="1.5">1.5%</option>
+      <option value="2" selected>2%</option>
+      <option value="3">3%</option>
+      <option value="5">5%</option>
+    </select>
+
+    <label>Stop Loss (pips)</label>
+    <input id="sl" type="number" step="0.1" placeholder="20">
+
+    <label>Pip Value (per pip per 1 lot in USD) <small>(or select preset)</small></label>
+    <input id="pipval" type="number" step="0.0001" placeholder="10">
+
+    <button id="calcRisk">Calculate Risk & Lot Size</button>
+
+    <div id="out" class="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('calcRisk').addEventListener('click', ()=> {
+      const acc = parseFloat(document.getElementById('acc').value);
+      const risk = parseFloat(document.getElementById('riskSelect').value);
+      const sl = parseFloat(document.getElementById('sl').value);
+      const pipval = parseFloat(document.getElementById('pipval').value);
+
+      if(isNaN(acc) || acc <= 0 || isNaN(risk) || isNaN(sl) || sl <= 0 || isNaN(pipval) || pipval <= 0){
+        document.getElementById('out').innerHTML = '<b style="color:#c00">Please fill all fields with valid numbers.</b>';
+        return;
+      }
+
+      const riskAmount = acc * (risk/100); // $
+      const lotSize = riskAmount / (sl * pipval);
+
+      document.getElementById('out').innerHTML = `
+        <div><b>Risk Amount:</b> $${riskAmount.toFixed(2)}</div>
+        <div style="margin-top:6px"><b>Stop Loss:</b> ${sl} pips</div>
+        <div style="margin-top:6px"><b>Recommended Lot Size:</b> ${lotSize.toFixed(2)} lots</div>
+        <div style="margin-top:8px"><small>Tip: set pip value according to pair (USD pairs ≈ $10 per pip per 1 lot).</small></div>
+      `;
+    });
+  </script>
+  </div>
+</body>
+</html>

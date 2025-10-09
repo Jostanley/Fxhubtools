@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel = "styleSheet" href = "forex-tool.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Position Size Calculator — Calculate Forex Lot Size | Fxhubtools</title>
+  <meta name="description" content="Find the correct lot size for your trades with our free Position Size Calculator. Avoid over-leveraging and trade safely.">
+  <meta name="keywords" content="position size calculator, forex lot size calculator, trade size, risk management, fxhubtools">
+  <link rel="canonical" href="https://fxhubtools.onrender.com/position-size.html">
+
+  <meta property="og:title" content="Forex Position Size Calculator — Calculate Correct Lot Size">
+  <meta property="og:description" content="Easily calculate ideal lot size based on account balance, risk %, and stop loss distance.">
+  <meta property="og:image" content="https://fxhubtools.onrender.com/assets/position-size-cover.jpg">
+  <meta property="og:url" content="https://fxhubtools.onrender.com/position-size.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "SoftwareApplication",
+    "name": "Position Size Calculator",
+    "operatingSystem": "All",
+    "applicationCategory": "FinanceApplication",
+    "description": "Free forex position size calculator that helps you find the perfect lot size per trade.",
+    "url": "https://fxhubtools.onrender.com/position-size.html"
+  }
+  </script>
+</head>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    
+   onAuthStateChanged(auth,(user)=>{
+        if(!user){
+            window.location.href ="./index.html"
+        } else{
+            document.getElementById("container").style.display= "block"
+        }
+    })
+</script>
+<body>
+    <div id="container">
+  <header>
+   
+    <nav>
+      <a href="pip-calculator.html">Pip</a>
+      <a href="risk-calculator.html">Risk</a>
+      <a href="position-size.html">Position</a>
+      <a href="profit-loss.html">P/L</a>
+      <a href="trade-journal.html">Journal</a>
+    </nav>
+  </header>
+
+  <h1>Position Size Calculator</h1>
+  <div class="banner position">
+    <span>📐</span>
+    <p>Never Over-Leverage Again – Find your perfect lot size in seconds.</p>
+  </div>
+  
+
+  <div class="card">
+    <label>Account Balance (USD)</label>
+    <input id="acc" type="number" step="0.01" placeholder="1000">
+
+    <label>Risk % of Account</label>
+    <input id="riskPct" type="number" step="0.1" value="2">
+
+    <label>Entry Price</label>
+    <input id="entry" type="number" step="0.0001" placeholder="e.g. 1.0850">
+
+    <label>Stop Loss Price</label>
+    <input id="stop" type="number" step="0.0001" placeholder="e.g. 1.0830">
+
+    <label>Pair (choose) & Pip value per 1 lot (USD)</label>
+    <select id="pair">
+      <option value="10">EUR/USD (pip ≈ $10)</option>
+      <option value="10">GBP/USD (pip ≈ $10)</option>
+      <option value="9.1">USD/JPY (pip ≈ $9.1)</option>
+      <option value="10">AUD/USD (pip ≈ $10)</option>
+      <option value="7">EUR/GBP (approx $7)</option>
+    </select>
+
+    <button id="calcPos">Calculate Position Size</button>
+
+    <div id="out" class="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('calcPos').addEventListener('click', ()=> {
+      const acc = parseFloat(document.getElementById('acc').value);
+      const riskPct = parseFloat(document.getElementById('riskPct').value);
+      const entry = parseFloat(document.getElementById('entry').value);
+      const stop = parseFloat(document.getElementById('stop').value);
+      const pipval = parseFloat(document.getElementById('pair').value);
+
+      if(isNaN(acc) || isNaN(riskPct) || isNaN(entry) || isNaN(stop) || isNaN(pipval)){
+        document.getElementById('out').innerHTML = '<b style="color:#c00">Please fill all fields correctly.</b>';
+        return;
+      }
+      // Determine pips depending on pair quoting (we assume 4-decimal for most, 2-decimal for JPY)
+      let pipDifference, pipUnit;
+      // If entry and stop are small decimals (<= 1), assume 4-decimal pip size of 0.0001
+      if(entry > 10 || stop > 10){ // likely JPY style quote like 154.30
+        pipUnit = 0.01;
+      } else {
+        pipUnit = 0.0001;
+      }
+      const diff = Math.abs(entry - stop);
+      pipDifference = diff / pipUnit;
+
+      if(pipDifference === 0){
+        document.getElementById('out').innerHTML = '<b style="color:#c00">Entry and Stop cannot be same.</b>';
+        return;
+      }
+
+      const riskAmount = acc * (riskPct / 100);
+      const lotSize = riskAmount / (pipDifference * pipval);
+
+      document.getElementById('out').innerHTML = `
+        <div><b>Pip distance:</b> ${pipDifference.toFixed(1)} pips</div>
+        <div style="margin-top:6px"><b>Risk Amount:</b> $${riskAmount.toFixed(2)}</div>
+        <div style="margin-top:6px"><b>Recommended Lot Size:</b> ${lotSize.toFixed(2)} lots</div>
+        <div style="margin-top:8px"><small>Note: this is approximate; adjust pip value to match pair's exact conversion.</small></div>
+      `;
+    });
+  </script>
+  </div>
+</body>
+</html>
