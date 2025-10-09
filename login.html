@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="styleSheet" href ="forex-tool.css">
+  <title>Login - Fxhubtools</title>
+</head>
+  <body>    
+ <div class="login-banner">
+  <h3>👋 Welcome Back to FXHubTools!</h3>
+  <p>Sign in to access your Forex tools, real-time insights, and trading strategies instantly.</p>
+</div>
+
+      <form id="loginForm">
+         <input type="email" id="email"         placeholder="Enter email" required /><br><br>
+         <input type="password" id="password" placeholder="Enter password" required /><br><br>
+    
+    <button type="submit" id="loginbutton">Login</button>
+  
+  </form>
+  <button type="submit" id="forgottenbutton"><a href="forgot-password.html">forgotten password</a></button>
+  
+
+  <p id="message"></p>
+<div  id="signin">if you already have account <a href="index.html">sign up </a></div>
+
+<div class="login-footer">
+  <!-- Terms & Privacy -->
+  <p class="terms">
+    By logging in, you agree to our 
+    <a href="terms.html" target="_blank">Terms</a> and 
+    <a href="policy.html" target="_blank">Privacy Policy</a>.
+  </p>
+
+  <!-- Support Contact -->
+  <p class="contact">
+    Need help? <a href="mailto:support@fxhubtools.com">support@fxhubtools.com</a>
+  </p>
+
+  <!-- Social Handles -->
+  <div class="social-links">
+    <a href="https://facebook.com/fxhubtools" target="_blank">Facebook</a> | 
+    <a href="https://twitter.com/fxhubtools" target="_blank">Twitter</a> | 
+    <a href="https://discord.gg/yourdiscordlink" target="_blank">Discord</a>
+  </div>
+</div>
+
+  <script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+
+    const form = document.getElementById("loginForm");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+    // Success message
+    message.textContent = "✅ Logged in as: " + userCredential.user.email;
+    message.style.color = "green";
+    message.style.backgroundColor = "#f2f2f2"; // ash background
+    message.style.padding = "8px 12px";
+    message.style.borderRadius = "6px";
+
+    // Redirect after login
+    window.location.href = 'pip-calculator.html';
+
+  } catch (error) {
+  let errorMessage = "Something went wrong, please try again.";
+
+  if (error.code === "auth/user-not-found") {
+    errorMessage = "No account found with this email.";
+  } else if (error.code === "auth/wrong-password") {
+    errorMessage = "Incorrect password. Please try again.";
+  } else if (error.code === "auth/invalid-email") {
+    errorMessage = "Please enter a valid email address.";
+  } else if (error.code === "auth/network-request-failed") {
+    errorMessage = "Network error. Please check your internet connection.";
+  } else if (error.code === "auth/invalid-credential") {
+    errorMessage = "Invalid credentials. Please check your login credentials.";
+  } else {
+    errorMessage = "Unexpected error: " + error.message;
+  }
+
+  // Display the error
+  message.textContent = errorMessage;
+  message.style.color = "red";
+  message.style.backgroundColor = "#f2f2f2"; // ash background
+  message.style.padding = "8px 12px";
+  message.style.borderRadius = "6px";
+}
+});
+    // Optional: Logout function
+    async function logout() {
+      await signOut(auth);
+      message.textContent = "🔒 Logged out";
+    }
+    
+  </script>
+</body>
+</html>

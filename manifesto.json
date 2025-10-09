@@ -1,0 +1,21 @@
+{
+  "name": "FXHubTools",
+  "short_name": "FXHub",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1E88E5",
+  "description": "Your ultimate forex toolkit to calculate pips, lot size, risk, and trade journal",
+  "icons": [
+    {
+      "src": "frontcover.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "frontc.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

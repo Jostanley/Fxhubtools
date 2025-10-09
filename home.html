@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="forex-tool.css">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fxhubtools | Free Forex Calculators, Courses & Market Tools</title>
+
+  <!-- Meta SEO -->
+  <meta name="description" content="Fxhubtools provides free forex calculators, beginner-to-advanced trading courses, mentorship, and daily forex signals. Learn and trade smarter today.">
+  <meta name="keywords" content="forex tools, forex calculator, pip calculator, position size calculator, profit loss calculator, forex course, forex trading for beginners, forex risk management, trading signals, fxhubtools">
+  <meta name="author" content="Fxhubtools">
+  <link rel="canonical" href="https://fxhubtools.com/">
+
+  <!-- Open Graph (for social media sharing) -->
+  <meta property="og:title" content="Fxhubtools | Free Forex Calculators & Trading Courses">
+  <meta property="og:description" content="Master forex trading with Fxhubtools – get free calculators, mentorship, and daily signal analysis.">
+  <meta property="og:image" content="https://fxhubtools.com/icons/frontcover.jpg">
+  <meta property="og:url" content="https://fxhubtools.com/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fxhubtools | Free Forex Calculators & Trading Courses">
+  <meta name="twitter:description" content="Join Fxhubtools to access free forex tools, risk calculators, trading courses, and mentorship.">
+  <meta name="twitter:image" content="https://fxhubtools.com/icons/frontcover.jpg">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Fxhubtools",
+    "url": "https://fxhubtools.com",
+    "logo": "https://fxhubtools.com/icons/frontcover.jpg",
+    "description": "Fxhubtools offers forex calculators, educational courses, and mentorship to help traders manage risk and trade profitably.",
+    "sameAs": [
+      "https://t.me/realjostanley",
+      "https://t.me/+TagTIHdbz0hjZWU0"
+    ]
+  }
+  </script>
+  
+</head>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    
+   onAuthStateChanged(auth,(user)=>{
+        if(!user){
+            window.location.href ="./index.html"
+        } else{
+            document.getElementById("home-container").style.display= "block"
+        }
+    })
+</script>
+<body>
+  <div id="home-container">
+        <div id="nav-container">
+        <nav>
+            <h4 id="fx">fxhubtools</h4>
+            <a href="/" id="fx-setting">Menu</a>
+        </nav>
+        </div>
+        <div id="calculator">
+   <img id="calculator-image" src="./icons/frontcover.jpg" alt="fxhubtools">
+            <img src="Fxhubtools.png" alt="">
+            <div id="calculator-quote">with our risk management tools you can manage your risk</div>
+            <div id="calculator-option">
+                <a href="pip-calculator.html">pips calculate</a>
+                               
+                <a href="risk-calculator.html">risk calculator</a>
+                <a href="position-size.html">position size</a>
+                <a href="profit-loss.html">profit and loss</a>
+
+               <a href="trade-journal.html">journal your trades</a>
+            </div>
+            <div id="note"> <strong >Note:</strong> journal and export is available to users who have subscribed for any of our paid plans</div>
+        </div>
+        
+        <div id="join-class">
+            <h1> course</h1>
+            <h3>we cover all the basics of forex trading from beginners level to advance ,so if you are new to forex trading it covers all you need to become a profitable trader. </h3>
+            <h4>This course covers:</h4>
+           <p><span id="span"></span><a href="./home/introduction.html">Introduction to forex.</a></p>
+           <p><span></span><a href="./home/broker.html">who is a broker.</a></p>
+           <p><span></span><a href="./home/basics.html">Basics of currency trading . </a></p>
+           <p><span></span><a href="./home/concept.html">Core Trading Concept .</a></p>
+           <p><span></span><a href="./home/technical.html">Trading  technical analysis </a></p>
+           
+           <p><span></span><a href="./home/analysis.html"> Simple Trading strategy .</a></p>
+           
+           <p><span></span><a href="./home/psycology.html">Trading psychology</a></p>
+           <p><span></span><a href="./home/tradeplan.html">Trade management </a></p>
+           <p><span></span><a href="./home/mistake.html">Common mistakes and how to avoid them </a></p>
+           <p><span></span><a href="./home/next-step.html">Next step for Growth </a> </p>
+           <p><span></span>Fxhubtools 90 </p>
+          <div id="class-membership">
+          <a id="courses-a" href="./home/introduction.html">Join for free</a>
+          </div>
+        </div>
+        
+        <div id="Telegram-private">
+            <h2>join the private telegram for   daily analysis and 90% win rate signals every day</h2>
+             <a href="https://t.me/realjostanley">join for free</a>
+        </div>
+        
+        <div id="private-mentorship">
+           <h4>for private mentorship, one on one consultation with me, to help and guide you true the journey of becoming successful forex traders </h4>
+           <div id="chat">
+               
+           <a href="https://t.me/+TagTIHdbz0hjZWU0">chat</a>
+           </div>
+        </div>
+        
+        <div id="market-place">
+  <h2>Fxhubtools Market</h2>
+  <h3>
+    You will get all the items you need as a forex trader from a reliable source and get them delivered to your doorstep.
+  </h3>
+
+  <div id="items-container">
+    <div class="item-card">
+      <img src="./icons/selar-forex.jpg" alt="forex trading">
+      <a href="http://tradewave.selar.com/?affiliate=6cd2" class="buy-btn">Buy</a>
+    </div>
+
+    <div class="item-card">
+      <img src="./store/gold-btc.jpg" alt="forex trading">
+      <a href="http://selar.com/m/oidglobal?affiliate=5zq6" class="buy-btn">Buy</a>
+    </div>
+  </div>
+
+  <a href="catalog.html" class="view-more-btn">View More Products</a>
+</div>
+    </div>
+</body>
+</html>

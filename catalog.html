@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic SEO -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="forex-tool.css">
+  <title>Fxhubtools Forex Product Catalog | Trading eBooks, Tools & Strategies</title>
+  <meta name="description" content="Explore Fxhubtools Market for premium Forex eBooks, trading tools, and strategies. Learn, trade, and grow your skills with trusted forex resources delivered to your doorstep.">
+  <meta name="keywords" content="Forex tools, forex ebooks, trading resources, forex strategy, fxhubtools, forex indicators, forex course, trading software, forex trading Ghana, Selar affiliate">
+  <meta name="author" content="Fxhubtools">
+
+  <!-- Open Graph for social media -->
+  <meta property="og:title" content="Fxhubtools Forex Product Catalog">
+  <meta property="og:description" content="Find trusted Forex tools, eBooks, and resources from Fxhubtools to improve your trading journey.">
+  <meta property="og:image" content="./icons/selar-forex.jpg">
+  <meta property="og:url" content="https://fxhubtools.com/catalog.html">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" href="./icons/selar-forex.jpg" type="image/jpg">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="catalog.css">
+
+  <!-- Structured Data (JSON-LD for products) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "Forex Strategy Guide",
+    "image": "./icons/selar-forex.jpg",
+    "description": "Learn professional forex strategies and start trading confidently.",
+    "brand": "Fxhubtools",
+    "offers": {
+      "@type": "Offer",
+      "url": "http://tradewave.selar.com/?affiliate=6cd2",
+      "priceCurrency": "USD",
+      "price": "19.99",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+</head>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    
+   onAuthStateChanged(auth,(user)=>{
+        if(!user){
+            window.location.href ="./index.html"
+        } else{
+            document.getElementById("catalog-container").style.display= "block"
+        }
+    })
+</script>
+<body>
+  <div id="catalog-container">
+    <header>
+      <h1>Fxhubtools</h1>
+      <p>All the essential <strong>forex trading tools</strong>, eBooks, and digital products you need from trusted global sources.just a reminder we may earn commission from any product purchased from every shop here</p>
+    </header>
+
+    <section id="product-grid">
+      <!-- Product 1 -->
+      <article class="product-card">
+        <img src="./icons/selar-forex.jpg" alt="Forex Strategy Guide eBook">
+        <div class="product-info">
+          <h2>Forex Strategy Guide</h2>
+          <p>Learn step-by-step forex trading strategies to improve your win rate and manage risk like a professional trader.</p>
+        
+          <a href="http://tradewave.selar.com/?affiliate=6cd2" class="buy-btn" rel="nofollow">shop</a>
+        </div>
+      </article>
+
+      <!-- Product 2 -->
+      <article class="product-card">
+        <img src="./store/gold-btc.jpg" alt="Gold and Bitcoin Trading Strategy eBook">
+        <div class="product-info">
+          <h2>Gold & BTC Trading Blueprint</h2>
+          <p>Master volatility and learn how to trade Gold and Bitcoin with precision using proven technical setups.</p>
+          
+          <a href="http://selar.com/m/oidglobal?affiliate=5zq6" class="buy-btn" rel="nofollow">shop</a>
+        </div>
+      </article>
+
+      <!-- Product 3 -->
+      <article class="product-card">
+        <img src="./store/candle.jpeg" alt="The hidden candle blueprint ">
+        <div class="product-info">
+          <h2>The Hidden Candle blueprint</h2>
+          <p>Get premium price action strategy , 4hr candle formation for daily bias and 15 min candle formation for entry, and analysis tools designed to help you make smarter trading decisions.</p>
+          
+          <a href="https://selar.com/7n7337gf7y" class="buy-btn" rel="nofollow">shop</a>
+        </div>
+      </article>
+
+      <!-- Product 4 -->
+      <article class="product-card">
+        <img src="./store/ebook.jpg" alt="Forex eBook Bundle for Beginners">
+        <div class="product-info">
+          <h2>Shares and Stocks Investment Masterclass</h2>
+          <p>Learn shares and Stocks Investment, understand  buying of shares and stocks and the appropriate time to buy stocks and shares</p>
+          
+          <a href="https://selar.com/p/84q321?affiliate=427f" class="buy-btn" rel="nofollow">Shop</a>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <a href="home.html" class="back-btn">← Back to Market</a>
+      <p>© 2025 Fxhubtools Market | <a href="https://fxhubtools.com">fxhubtools.com</a></p>
+    </footer>
+  </div>
+</body>
+</html>
