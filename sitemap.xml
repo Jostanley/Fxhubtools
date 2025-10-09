@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
+  <url>
+    <loc>https://fxhubtools.onrender.com/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/catalog.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Calculators -->
+  <url>
+    <loc>https://fxhubtools.onrender.com/pip-calculator.html</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/risk-calculator.html</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/position-size.html</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/profit-loss.html</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/trade-journal.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Course Pages -->
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/introduction.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/broker.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/basics.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/concept.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/technical.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/analysis.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/psycology.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/tradeplan.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/mistake.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fxhubtools.onrender.com/home/next-step.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- External Market & Mentorship Links (optional references) -->
+  <url>
+    <loc>https://t.me/realjostanley</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://t.me/+TagTIHdbz0hjZWU0</loc>
+    <priority>0.3</priority>
+  </url>
+</urlset>
