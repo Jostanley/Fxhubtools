@@ -340,6 +340,7 @@ padding:7px;
  }
  #container{
      display :none;
+     width:100vw;
  }
  #calculator{
      margin:20% 0 ;
