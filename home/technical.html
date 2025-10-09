@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="class.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Primary SEO -->
+  <title>Technical Analysis Basics — Price Charts, Candlesticks & Support/Resistance | Fxhubtools</title>
+  <meta name="description" content="Learn Technical Analysis basics: how to read price charts, candlestick patterns (doji, hammer, engulfing), and support & resistance. Mobile-friendly forex guide with images and examples." />
+  <meta name="keywords" content="technical analysis, price charts, candlestick patterns, support and resistance, forex basics, forex chart reading, engulfing candle, doji, hammer" />
+  <link rel="canonical" href="https://fxhubtools.onrender.com/technical-analysis-basics.html" />
+
+  <!-- Open Graph (social sharing) -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Technical Analysis Basics — Price Charts, Candlesticks & Support/Resistance" />
+  <meta property="og:description" content="A beginner-friendly guide to reading price charts, recognizing candlestick patterns (Doji, Hammer, Engulfing) and identifying support & resistance in forex trading." />
+  <meta property="og:image" content="https://fxhubtools.onrender.com/assets/pricechart-cover.jpg" />
+  <meta property="og:url" content="https://fxhubtools.onrender.com/technical-analysis-basics.html" />
+  <meta property="og:site_name" content="Fxhubtools" />
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Technical Analysis Basics — Fxhubtools" />
+  <meta name="twitter:description" content="Beginner friendly: read price charts, spot candlestick signals, and trade using support & resistance. Mobile-optimized forex lessons." />
+  <meta name="twitter:image" content="https://fxhubtools.onrender.com/assets/pricechart-cover.jpg" />
+
+  <!-- Structured Data: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://fxhubtools.onrender.com/technical-analysis-basics.html"
+    },
+    "headline": "Technical Analysis Basics — Price Charts, Candlesticks & Support/Resistance",
+    "description": "Learn Technical Analysis basics: how to read price charts, candlestick patterns (doji, hammer, engulfing), and support & resistance. Mobile-friendly forex guide with images and examples.",
+    "image": "fxhubtool.png",
+    "author": {
+      "@type": "Person",
+      "name": "Fxhubtools"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Fxhubtools",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://fxhubtools.onrender.com/assets/logo.png"
+      }
+    },
+    "datePublished": "2025-10-08",
+    "dateModified": "2025-10-08"
+  }
+  </script>
+</head>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    
+   onAuthStateChanged(auth,(user)=>{
+        if(!user){
+            window.location.href ="../index.html"
+        } else{
+            document.getElementById("container").style.display= "block"
+        }
+    })
+</script>
+<body>
+    <div id="container">
+        
+      ‎
+<h2> Technical Analysis Basics
+‎
+‎</h2>
+
+‎
+<strong>‎4.1 Introduction to Price Charts
+‎</strong>
+<p>‎Price charts are the foundation of technical analysis in forex trading. A price chart is simply a graph that shows how the value of a currency pair changes over time. Instead of looking at random numbers, charts allow traders to see patterns, trends, and opportunities visually.
+‎<div>
+    <img src="../icons/pricechart.png" alt=" price chart" width="100%" height="70%">
+</div>
+‎When you open a forex trading platform, the first thing you see is a chart. This chart represents the relationship between buyers (bulls) and sellers (bears). If buyers are stronger, prices rise; if sellers dominate, prices fall. Studying charts helps traders understand this constant battle and predict possible future moves.
+‎
+‎Charts are divided into timeframes. A 1-minute chart shows price movement every minute, while a daily chart shows price changes for each day. Shorter timeframes are useful for scalpers and day traders, while longer timeframes are better for swing traders and investors.
+‎
+‎The importance of price charts cannot be overstated:
+‎
+‎They help identify trends (uptrend, downtrend, sideways).
+‎
+‎They reveal volatility (how fast prices move).
+‎
+‎They allow traders to apply tools such as indicators, trendlines, and candlestick analysis.
+
+‎</p>
+<p>‎For example, if EUR/USD has been moving upward steadily for weeks on a daily chart, this suggests a strong uptrend. A beginner who understands charts will know that buying opportunities are more favorable in an uptrend, rather than randomly selling.
+‎</p>
+<strong>‎In summary,</strong> <p>price charts are the trader’s map. Just like a driver cannot travel safely without a road map, a trader cannot succeed in forex without reading charts.
+‎
+‎</p>
+
+‎
+<strong>‎4.2 Types of Charts (Line, Bar, Candlestick)
+‎</strong>
+<p>‎There are three main types of charts used in forex trading: line charts, bar charts, and candlestick charts. Each has its advantages and is useful depending on the trader’s goal.
+</p>
+‎
+<strong>‎1. Line Chart</strong>
+<div>
+    <img src="../icons/linechart.png" alt="line chart" width="100%" height="70%">
+</div>
+<p>‎This is the simplest type of chart. It connects the closing prices of a currency pair over time with a straight line. Beginners like line charts because they are clean and easy to read. They are best for spotting the general trend of the market. However, line charts hide details such as highs and lows, making them less useful for precise trading decisions.
+‎</p>
+‎
+<strong>‎2. Bar Chart</strong>
+<p>‎A bar chart provides more information. Each bar represents a time period (e.g., one hour or one day) and shows the open, high, low, and close (OHLC). This gives traders more insight into how price moved during that period. The vertical line represents the range, while the small horizontal dashes show the open and close.
+‎
+‎</p>
+<strong>‎3. Candlestick Chart</strong>
+<p>‎This is the most popular chart type among traders. Like bar charts, candlesticks show OHLC data, but they are more visual. A green/white candlestick means price closed higher than it opened (bullish), while a red/black candlestick means price closed lower (bearish). Candlestick patterns provide signals about potential reversals or continuations in the market.</p>
+‎
+‎
+‎
+<strong>‎Example:</strong> <p>If EUR/USD is trending upward, a candlestick chart may show a “bullish engulfing” pattern, suggesting that buyers are getting stronger.
+‎
+‎In practice, most traders rely heavily on candlestick charts because they combine detail with simplicity.
+‎
+‎</p>
+‎
+<strong>‎4.3 Understanding Candlestick Patterns</strong>
+‎
+<p>‎Candlesticks are powerful because they not only show price levels but also reveal market psychology. Each candlestick tells the story of buyers and sellers battling within a timeframe. Certain patterns repeat frequently and give traders valuable signals.
+‎</p>
+<strong>‎Basic Structure of a Candlestick:
+‎</strong>
+<p>
+‎The body shows the open and close prices.
+‎
+‎The wicks/shadows show the highest and lowest prices during the period.
+‎
+‎A bullish candle (often green/white) closes higher than it opened.
+‎
+‎A bearish candle (often red/black) closes lower than it opened.
+‎</p>
+‎
+<strong>‎Key Patterns to Know:</strong>
+‎
+<strong>‎Doji:</strong> 
+<div>
+    <img src="../icons/doji.png" alt="doji" width="100%" height ="70%">
+</div><p>When the open and close are almost the same. It signals indecision — neither buyers nor sellers are in control.</p>
+‎
+<strong>‎Hammer:</strong>
+<div>
+    <img src="../icons/Hammer.png" alt="hammer" width="100%" height="70%">
+</div> <p>Small body with a long lower wick. Appears after a downtrend and suggests buyers are stepping in to push prices up.
+‎</p>
+<strong>‎Engulfing: </strong>
+<div>
+    <img src="../icons/engulfing.png" alt="engulfing" width="100%" height="70%">
+</div><p>A large candle completely covers the previous one. Bullish engulfing suggests strong upward momentum, while bearish engulfing suggests strong downward pressure.
+‎</p>
+<strong>‎Shooting Star: </strong>
+<div>
+    <img src="../icons/shootingstar.png" alt="shooting star" width="100%" height="70%">
+</div><p>Small body with a long upper wick. Appears after an uptrend and signals that buyers are losing strength.
+‎
+‎</p>
+<strong>‎Example: </strong><p>If USD/JPY has been falling and then forms a hammer candle at a key support level, it may be a sign that the trend is about to reverse upward.
+‎
+‎Candlestick patterns are not perfect, but when combined with support/resistance and indicators, they become powerful tools for predicting market movements.
+‎
+‎</p>
+‎
+‎
+<strong>‎4.4 Support and Resistance Basics
+‎</strong>
+<p>‎Support and resistance are the most important concepts in technical analysis. They act as “barriers” on the chart where price struggles to break through.
+‎</p>
+<strong>‎Support:</strong><p> A level where price tends to stop falling and bounce upward. It shows strong buying interest. Think of it as the floor of the market.
+</p>
+‎<strong>‎Resistance:</strong> <p>A level where price tends to stop rising and fall back down. It shows strong selling interest. Think of it as the ceiling of the market.
+‎
+‎
+‎For example, if EUR/USD has bounced upward three times from 1.0900, that level is considered support. If it keeps failing to rise above 1.1100, that level is resistance.
+‎</p>
+<strong>‎Why They Matter:</strong>
+‎<p>
+‎Traders look to buy at support and sell at resistance.
+‎
+‎Breakouts (when price moves strongly through support or resistance) often signal the start of a new trend.
+‎
+‎Support and resistance help define entry and exit points for trades.
+‎<div>
+    <img src="../icons/support.png" alt="support and resistance" width="100%" height="70%">
+</div>
+‎</p>
+<strong>‎How to Identify Them:</strong>
+‎
+<p>‎Past highs and lows (historical turning points).
+‎
+‎Psychological “round numbers” (e.g., 1.1000, 1.2000).
+‎
+‎Moving averages and trendlines that price respects over time.
+‎</p>
+‎
+<strong>‎Example: </strong><p>If GBP/USD is trading at 1.3000 and you notice it has bounced down from this level multiple times, it is a resistance zone. If the price finally breaks above 1.3000 with strong volume, it could signal the start of a bullish trend.
+‎
+‎In summary, support and resistance act like guideposts for traders, helping them plan trades with higher accuracy and lower risk.
+‎
+‎</p>
+‎<div id="next-container">
+    <div id="next-step">
+    <a href="../home/broker.html">previous 👈</a>
+    <a href="../home/analysis.html">Next 👉</a>
+    </div>
+</div>
+‎ 
+    </div>
+</body>
+</html>
