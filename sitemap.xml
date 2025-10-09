@@ -74,13 +74,5 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- External Market & Mentorship Links (optional references) -->
-  <url>
-    <loc>https://t.me/realjostanley</loc>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://t.me/+TagTIHdbz0hjZWU0</loc>
-    <priority>0.3</priority>
-  </url>
+
 </urlset>
