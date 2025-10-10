@@ -110,7 +110,7 @@
       await updateProfile(user, { displayName: name });
 
       // ✅ Send user data to backend
-      const res = await fetch("https://fxhubtools-backend.onrender.com, {
+      const res = await fetch("https://fxhubtools-backend.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
