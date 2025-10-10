@@ -90,7 +90,7 @@ input{
     .toggle {
       position: absolute;
       right: 12px;
-      top: 50%;
+      top: 30%;
       transform: translateY(-50%);
       cursor: pointer;
       font-size: 14px;
