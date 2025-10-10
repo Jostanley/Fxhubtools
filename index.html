@@ -19,9 +19,9 @@
     <br><br>
     <input type="email" id="email" placeholder="Enter email" required />
     <br><br>
-<div id = "input-group>
+<div class= "input-group>
     <input type="password" id="password" placeholder="Enter password" required />
-        <span class="toggle" onclick="togglePassword('confirmPassword')">Show</span>
+        <span class="toggle" onclick="togglePassword('Password')">Show</span>
     <br><br>
 </div>
     
@@ -168,6 +168,17 @@
       messageBox.style.borderRadius = "6px";
     }
   });
+    window.togglePassword = function(fieldId) {
+      const input = document.getElementById(fieldId);
+      const toggleBtn = input.nextElementSibling;
+      if (input.type === "password") {
+        input.type = "text";
+        toggleBtn.textContent = "Hide";
+      } else {
+        input.type = "password";
+        toggleBtn.textContent = "Show";
+      }
+    };
 </script>
   
 </body>
