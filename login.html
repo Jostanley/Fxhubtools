@@ -14,7 +14,10 @@
 
       <form id="loginForm">
          <input type="email" id="email"         placeholder="Enter email" required /><br><br>
-         <input type="password" id="password" placeholder="Enter password" required /><br><br>
+      <div class = "input-group>
+         <input type="password" id="password" placeholder="Enter password" required />
+
+</div><br><br>
     
     <button type="submit" id="loginbutton">Login</button>
   
@@ -120,7 +123,17 @@ form.addEventListener("submit", async (e) => {
       await signOut(auth);
       message.textContent = "🔒 Logged out";
     }
-    
+        window.togglePassword = function(fieldId) {
+      const input = document.getElementById(fieldId);
+      const toggleBtn = input.nextElementSibling;
+      if (input.type === "password") {
+        input.type = "text";
+        toggleBtn.textContent = "Hide";
+      } else {
+        input.type = "password";
+        toggleBtn.textContent = "Show";
+      }
+    };
   </script>
 </body>
 </html>
