@@ -26,7 +26,7 @@
   I agree to the 
   <a href="terms.html" target="_blank">Terms of Service</a>  and 
   <a href="policy.html" target="_blank">Privacy Policy</a>
-  <input type="checkbox" required>
+  <input type="checkbox" id = "checkbox" required>
   <span class="checkmark"></span>
 </label><br><br>
   
@@ -74,7 +74,7 @@
     apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
     authDomain: "forextools-c50c0.firebaseapp.com",
     projectId: "forextools-c50c0",
-    storageBucket: "forextools-c50c0.firebasestorage.app",
+    storageBucket: "forextools-c50c0.firebasestorage.appspot",
     messagingSenderId: "600617054080",
     appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
     measurementId: "G-MK55ZT2RWQ"
@@ -94,7 +94,7 @@
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
-    const checkbox = document.getElementById("terms");
+    const checkbox = document.getElementById("checkbox");
 
     if (!checkbox.checked) {
       alert("You must agree to the Terms and Privacy Policy before registering.");
