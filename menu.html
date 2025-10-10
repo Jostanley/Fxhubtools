@@ -43,6 +43,36 @@
     }
   </style>
 </head>
+<script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
+      authDomain: "forextools-c50c0.firebaseapp.com",
+      projectId: "forextools-c50c0",
+      storageBucket: "forextools-c50c0.firebasestorage.app",
+      messagingSenderId: "600617054080",
+      appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
+      measurementId: "G-MK55ZT2RWQ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+
+   onAuthStateChanged(auth,(user)=>{
+        if(!user){
+            window.location.href ="./index.html"
+        } else{
+            document.getElementById("container").style.display= "block"
+        }
+    })
+</script>
 <body>
   <div id="menu-container">
     <div id="menu-nav">
