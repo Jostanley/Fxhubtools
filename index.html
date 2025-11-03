@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+</head>
+<style>
+  body{
+      margin:0;
+      background:url("./icons/genbg.jpeg");
+      padding:0;
+      position: relative;
+      width:100vw;
+  }  
+  header{
+      padding:5px;
+      margin:12px;
+  }
+  #header-container{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+     
+  }
+  #header-container p{
+      background: white;
+      color :black;
+      padding:5px;
+      font-weight:700;
+      border-radius:10px;
+  }
+  #section-1{
+      margin:20px;
+      padding:10px;
+      background : White;
+      border-radius :20px;
+      background: transparent;
+      word-spacing:3px;
+      opacity:1;
+      border:2px solid red;
+  }
+  #section-1 p{
+      color: white;
+      font-weight:700;
+      
+  }
+  #section-1-btn{
+     display:flex;
+     align-self:center;
+     justify-self:center;
+     background:white;
+     color:red;
+     padding:10px;
+     box-shadow:10px 12px 15px black;
+     font-weight:900;
+     font-size:10px;
+     border-radius: 50%;
+     cursor:pointer;
+     border: none;
+     outline:none;
+  }
+  #scrollbar{
+      background:black;
+      color:white;
+      width:100vw;
+      
+  }
+  #scrollbar h2{
+      text-align:center;
+      padding:5px;
+  }
+  #scroll-list{
+  background:url("./icons/scrollbar.jpg") no-repeat center center /cover;
+  display:flex;
+  align-items:center;
+  flex-direction: row;
+  overflow-x:auto;  
+  width:100vw;
+  gap:10px;
+  padding:10px;
+  height:220px;
+  scroll-behaviour:smooth;
+  
+  }
+  .bar-list{
+      flex-shrink:0;
+      width:250px;
+      color:white;
+      border:2px solid white;
+      border-radius:20% 10px;
+      padding:20px;
+  }
+  #course{
+      margin:39px 5px;
+      background:blur;
+      color:white;
+      border:2px solid red;
+      padding:15px 10px;
+      border-radius:10px;
+      position: relative;
+      
+  }
+  #course-container {
+     margin:5px;
+  }
+  
+  #course p{
+     
+     font-style:italic; 
+     color:white;
+  }
+  #course button {
+      position: absolute;
+      right:50%;
+      bottom:1%;
+  }
+  #course-container{
+      display:flex;
+      flex-direction:column;
+      align-items:left;
+      
+  }
+  #course-list{
+  display :flex;
+  flex-wrap:flex-wrap;
+  align-items:center;
+  position: relative;
+      
+  }
+  #course-list span{
+      width:15px;
+      height:15px;
+      background:white;
+      border-radius:50%;
+      margin:5px;
+  }
+  #scrollbar a{
+      background:red;
+      color:white;
+      padding:5px;
+      border-radius:10px;
+      cursor :pointer;
+      text-decoration:none;
+  }
+  #ebooks{
+      border:2px solid red;
+      padding:5px;
+  }
+  #ebooks h3{
+      text-align:center;
+      color:white;
+  }
+  #ebook-container{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+  }
+  #ebook-img{
+      width:80%;
+      height:50%;
+      display:flex;
+      align-self:center;
+      border-radius:10px;
+  }
+  #ebooks a{
+      color:white;
+      text-decoration: none;
+      background:#00ff3b;
+      margin-top:20px;
+      padding:10px 5px;
+      border-radius:10px;
+  }
+</style>
+<body>
+    <header>
+        <div id="header-container">
+            <p>Fxhubtools</p>
+            <p>Menu</p>
+        </div>
+    </header>
+    <body>
+        <section>
+        <div id="body-container">
+            <div id="section-1">
+                <p>Fxhubtools is a trading platform that provides traders with tools to leverage their trading experience and become a more profitable trader.Risk management tools, professional and exportable trading journal,free trading training for a beginner and advanced traders,tested and proving strategies</p>
+            </div>
+            <a href="register.html" id="section-1-btn">Get started</a>
+        </div>
+        </section>
+        <section>
+        <div id="scrollbar">
+            <h2>Risk Management Tools</h2>
+            <div id="scroll-list">
+              <div class="bar-list">
+                 <h3>Pips calculator</h3> 
+                   <p>Master Your Pips with Precision – Instantly calculate pip values and trade smarter.</p>
+                 <a href="pip-calculator.html">explore</a>
+              </div>  
+              <div class="bar-list">
+                 <h3>Risk calculator</h3> 
+               <p>Control Your Risk Before You Enter – Protect your capital with smart risk calculation.</p>
+                 <a href="risk-calculator.html">explore</a>
+                 </div>
+                 <div class="bar-list">
+                 <h3>position size calculator</h3> 
+                 <p>Never Over-Leverage Again – Find your perfect lot size in seconds.</p>
+                 <a href="position-size.html">explore</a>
+                 </div>
+                 <div class="bar-list">
+                 <h3>profit and loss calculator</h3> 
+                  <p>Plan Ahead, Win More – Estimate profits or losses before you trade.</p>
+                 <a href ="profit-loss.html">explore</a>
+                 </div>
+                 <div class="bar-list">
+                 <h3>Trading Journal </h3> 
+                 <p>Turn Every Trade into a Lesson – Track, review, and grow with your trading journal.</p>
+                 <a href ="trading-journal.html">explore</a>
+                 </div>
+            </div>
+        </div>
+        </section>
+        <section >
+            <div id="course">
+                <div id="course-container">
+                   <p>Enroll into our free professional curated Trading training program ,design to offer our student the right knowledge that matters in trading, no jargon , clear explanation of concept that  makes it easier for a new trader to learn fast and grab what matters.</p> 
+                   <p>The following concept below are explained in dept; </p>
+                   <div id="course-container">
+                   <div id="course-list">
+                       <span></span>
+                       <p>Introduction to forex trading</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Who is a broker<div></div></p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Basics of currency Trading </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Introduction to forex trading</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Core Trading Concept</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Introduction to forex trading</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Technical Analysis (Top/Down analysis </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Simple Trading Strategy </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Trading psychology and </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Trade Management </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Common Trading Mistakes and How to avoid it</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p> Fxhubtools Team trading strategy </p>
+                   </div>
+                   <a href ="home.html">Enroll for free</a>
+                </div>
+                </div>
+            </div>
+        </section>
+        <section >
+            <div id="ebooks">
+                <h3>Trading Materials</h3>
+             <div id="ebook-list">
+                 <div id="ebook-container">
+                    <img src="./icons/hiddenblueprint.png" alt="ebook" id="ebook-img"> 
+                     <a href="home.html">Explore</a>
+                 </div>
+                
+             </div>   
+            </div>
+        </section>
+    </body>
+</body>
+</html>
