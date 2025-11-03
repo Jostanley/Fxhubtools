@@ -1,188 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="styleSheet" href ="forex-tool.css">
-  <title>Fxhubtools | Learn Forex Trading - Risk management tools </title>
+    <meta charset="UTF-8">
+    <title>Page title</title>
 </head>
-<body>
-<div class="index_banner">
-  <h3>FXHubTools - Your Ultimate Forex Toolkit!</h3>
-  <p>Learn forex trading,Get trading  Courses, Risk management tools, and strategies to level up your trading game. Join now and start trading smarter!</p>
-</div>
-
-
-  <!-- Register form -->
-  <form id="registerForm">
-
-    <input type="text" id="name" placeholder="Name" required />
-    <br><br>
-
-    <input type="email" id="email" placeholder="Enter email" required />
-    <br><br>
-
-<div class= "input-group">
-    <input type="password" id="password" placeholder="Enter password" required />
-        <span class="toggle" onclick="togglePassword('password')">Show</span>
-    <br><br>
-</div>
-    
-    <label class="checkbox-container">
-  I agree to the 
-  <a href="terms.html" target="_blank">Terms of Service</a>  and 
-  <a href="policy.html" target="_blank">Privacy Policy</a>
-  <input type="checkbox" id = "checkbox" >
-  <span class="checkmark"></span>
-</label><br><br>
-  
-    <button type="submit" id="registerbutton">Register</button>
-  </form>
-
-  <div class="signin">
-    If you already have an account. <a href="login.html">login</a>
-  </div>
-  <p id="message"></p>
-  
-  <div class="login-footer">
-  <!-- Terms & Privacy -->
-  <p class="terms">
-    By Registering, you agree to our 
-    <a href="terms.html" target="_blank">Terms</a> and 
-    <a href="policy.html" target="_blank">Privacy Policy</a>.
-  </p>
-
-  <!-- Support Contact -->
-  <p class="contact">
-    Need help? <a href="mailto:support@fxhubtools.com">support@fxhubtools.com</a>
-  </p>
-
-  <!-- Social Handles -->
-  <div class="social-links">
-    <a href="https://facebook.com/fxhubtools" target="_blank">Facebook</a> | 
-    <a href="https://twitter.com/fxhubtools" target="_blank">Twitter</a> | 
-    <a href="https://discord.gg/yourdiscordlink" target="_blank">Discord</a>
-  </div>
+<style>
+  body{
+      margin:0;
+      background:url("genbg.jpeg");
+      padding:0;
+      position: relative;
+      width:100vw;
+  }  
+  header{
+      padding:5px;
+      margin:12px;
+  }
+  #header-container{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
      
-<script type="module">
-  import { 
-    initializeApp 
-  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-
-  import { 
-    getAuth, 
-    createUserWithEmailAndPassword, 
-    updateProfile 
-  } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-
-  // ✅ Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBgDV5rxlUUHNyk5VGaEqtIligZZupd7qU",
-    authDomain: "forextools-c50c0.firebaseapp.com",
-    projectId: "forextools-c50c0",
-    storageBucket: "forextools-c50c0.firebasestorage.appspot",
-    messagingSenderId: "600617054080",
-    appId: "1:600617054080:web:7e4206f981ab4c9ba91b65",
-    measurementId: "G-MK55ZT2RWQ"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  const registerForm = document.getElementById("registerForm");
-  const messageBox = document.getElementById("message");
-
-  // ✅ Register user and send data to backend (no email verification)
-  registerForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const checkbox = document.getElementById("checkbox");
-
-    if (!checkbox.checked) {
-      alert("You must agree to the Terms and Privacy Policy before registering.");
-      return;
-    }
-
-    try {
-      // Create Firebase account
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      // Set display name
-      await updateProfile(user, { displayName: name });
-
-      // ✅ Send user data to backend
-      const res = await fetch("https://fxhubtools-backend.onrender.com/auth", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          uid: user.uid,
-        }),
-      });
-
-      if (!res.ok) {
-        const errData = await res.json();
-        throw new Error(errData.message || "Failed to send user data to backend.");
-      }
-
-      messageBox.textContent = "✅ Registration successful!";
-      messageBox.style.color = "green";
-      messageBox.style.backgroundColor = "#f2fff2";
-      messageBox.style.padding = "10px";
-      messageBox.style.borderRadius = "6px";
-
-      registerForm.reset();
-
+  }
+  #header-container p{
+      background: white;
+      color :black;
+      padding:5px;
+      font-weight:700;
+      border-radius:10px;
+  }
+  #section-1{
+      margin:20px;
+      padding:10px;
+      background : White;
+      border-radius :20px;
+      background: transparent;
+      word-spacing:3px;
+      opacity:1;
+      border:2px solid red;
+  }
+  #section-1 p{
+      color: white;
+      font-weight:700;
       
-       window.location.href = "./home.html";
-
-    } catch (error) {
-      console.error("Error:", error.message);
-
-      let errorMessage = "Something went wrong. Please try again.";
-
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          errorMessage = "This email is already registered. Please login.";
-          break;
-        case "auth/invalid-email":
-          errorMessage = "Invalid email format.";
-          break;
-        case "auth/weak-password":
-          errorMessage = "Password must be at least 6 characters.";
-          break;
-        case "auth/network-request-failed":
-          errorMessage = "Network error. Please check your internet connection.";
-          break;
-        default:
-          errorMessage = error.message;
-      }
-
-      messageBox.textContent = "❌ " + errorMessage;
-      messageBox.style.color = "red";
-      messageBox.style.backgroundColor = "#f9f9f9";
-      messageBox.style.padding = "8px 12px";
-      messageBox.style.borderRadius = "6px";
-    }
-  });
-    window.togglePassword = function(fieldId) {
-      const input = document.getElementById(fieldId);
-      const toggleBtn = input.nextElementSibling;
-      if (input.type === "password") {
-        input.type = "text";
-        toggleBtn.textContent = "Hide";
-      } else {
-        input.type = "password";
-        toggleBtn.textContent = "Show";
-      }
-    };
-</script>
+  }
+  #section-1-btn{
+     display:flex;
+     align-self:center;
+     justify-self:center;
+     background:white;
+     color:red;
+     padding:10px;
+     box-shadow:10px 12px 15px black;
+     font-weight:900;
+     font-size:10px;
+     border-radius: 50%;
+     cursor:pointer;
+     border: none;
+     outline:none;
+  }
+  #scrollbar{
+      background:black;
+      color:white;
+      width:100vw;
+      
+  }
+  #scrollbar h2{
+      text-align:center;
+      padding:5px;
+  }
+  #scroll-list{
+  background:url("scrollbar.jpg") no-repeat center center /cover;
+  display:flex;
+  align-items:center;
+  flex-direction: row;
+  overflow-x:auto;  
+  width:100vw;
+  gap:10px;
+  padding:10px;
+  height:220px;
+  scroll-behaviour:smooth;
   
+  }
+  .bar-list{
+      flex-shrink:0;
+      width:250px;
+      color:white;
+      border:2px solid white;
+      border-radius:20% 10px;
+      padding:20px;
+  }
+  #course{
+      margin:39px 5px;
+      background:blur;
+      color:white;
+      border:2px solid red;
+      padding:15px 10px;
+      border-radius:10px;
+      position: relative;
+      
+  }
+  #course-container {
+     margin:5px;
+  }
+  
+  #course p{
+     
+     font-style:italic; 
+     color:white;
+  }
+  #course button {
+      position: absolute;
+      right:50%;
+      bottom:1%;
+  }
+  #course-container{
+      display:flex;
+      flex-direction:column;
+      align-items:left;
+      
+  }
+  #course-list{
+  display :flex;
+  flex-wrap:flex-wrap;
+  align-items:center;
+  position: relative;
+      
+  }
+  #course-list span{
+      width:15px;
+      height:15px;
+      background:white;
+      border-radius:50%;
+      margin:5px;
+  }
+  #ebooks{
+      border:2px solid red;
+      padding:5px;
+  }
+  #ebooks h3{
+      text-align:center;
+      color:white;
+  }
+  #ebook-container{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+  }
+  #ebook-img{
+      width:80%;
+      height:50%;
+      display:flex;
+      align-self:center;
+      border-radius:10px;
+  }
+  #ebooks a{
+      color:white;
+      text-decoration: none;
+      background:#00ff3b;
+      margin-top:20px;
+      padding:10px 5px;
+      border-radius:10px;
+  }
+</style>
+<body>
+    <header>
+        <div id="header-container">
+            <p>Fxhubtools</p>
+            <p>Menu</p>
+        </div>
+    </header>
+    <body>
+        <section>
+        <div id="body-container">
+            <div id="section-1">
+                <p>Fxhubtools is a trading platform that provides traders with tools to leverage their trading experience and become a more profitable trader.Risk management tools, professional and exportable trading journal,free trading training for a beginner and advanced traders,tested and proving strategies</p>
+            </div>
+            <button  id="section-1-btn">Get started</button>
+        </div>
+        </section>
+        <section>
+        <div id="scrollbar">
+            <h2>Risk Management Tools</h2>
+            <div id="scroll-list">
+              <div class="bar-list">
+                 <h3>Pips calculator</h3> 
+                 <p>Risk management is a essential part of trading </p>
+                 <button>explore</button>
+              </div>  
+              <div class="bar-list">
+                 <h3>Risk calculator</h3> 
+                 <p>Risk management is a essential part of trading </p>
+                 <button>explore</button>
+                 </div>
+                 <div class="bar-list">
+                 <h3>position size calculator</h3> 
+                 <p>Risk management is a essential part of trading </p>
+                 <button>explore</button>
+                 </div>
+                 <div class="bar-list">
+                 <h3>profit and loss calculator</h3> 
+                 <p>Risk management is a essential part of trading </p>
+                 <button>explore</button>
+                 </div>
+            </div>
+        </div>
+        </section>
+        <section >
+            <div id="course">
+                <div id="course-container">
+                   <p>Enroll into our free professional curated Trading training program ,design to offer our student the right knowledge that matters in trading, no jargon , clear explanation of concept that  makes it easier for a new trader to learn fast and grab what matters.</p> 
+                   <p>The following concept below are explained in dept; </p>
+                   <div id="course-container">
+                   <div id="course-list">
+                       <span></span>
+                       <p>Introduction to forex trading</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Who is a broker<div></div></p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Basics of currency Trading </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Introduction to forex trading</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Core Trading Concept</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Introduction to forex trading</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Technical Analysis (Top/Down analysis </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Simple Trading Strategy </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Trading psychology and </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Trade Management </p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p>Common Trading Mistakes and How to avoid it</p>
+                   </div>
+                   <div id="course-list">
+                       <span></span>
+                       <p> Fxhubtools Team trading strategy </p>
+                   </div>
+                   <button>Enroll for free</button>
+                </div>
+                </div>
+            </div>
+        </section>
+        <section >
+            <div id="ebooks">
+                <h3>Trading Materials</h3>
+             <div id="ebook-list">
+                 <div id="ebook-container">
+                    <img src="hiddenblueprint.png" alt="ebook" id="ebook-img"> 
+                     <a href="">Explore</a>
+                 </div>
+                
+             </div>   
+            </div>
+        </section>
+    </body>
 </body>
-</html>
+  </html>
