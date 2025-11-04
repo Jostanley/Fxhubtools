@@ -1,3 +1,6 @@
+*{
+  box-sizing:border-box;
+}
 .index_banner {
     background: linear-gradient(90deg, #ff6a00, #ee0979);
     color: #fff;

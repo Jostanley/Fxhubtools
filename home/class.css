@@ -1,3 +1,6 @@
+*{
+  box-sizing:border-box;
+}
 body{
     font-family: San-serif,arial ;
     margin:0;
